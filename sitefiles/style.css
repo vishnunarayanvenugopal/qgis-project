@@ -1,0 +1,50 @@
+html, body, #container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+body {
+  /* height of .navbar, customize with @navbar-height variable */
+  padding-top: 50px;
+}
+.navbar {
+  min-height: 50px;
+}
+#sidebar {
+  float: left;
+  height: 100%;
+  max-width: 100%;
+  width: 150px;
+}
+#map {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: auto;
+}
+.sidebar-wrapper {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+@media (max-width: 767px) {
+#sidebar {
+  display: none;
+}
+}
+
+ .legend {
+            color: #333;
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            padding: 6px 21px 6px 21px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .legend h3 {
+            line-height: 5px;
+        }
+        .legend ul {
+            line-height: 15px;
+            padding-left: 20px;
+        }
