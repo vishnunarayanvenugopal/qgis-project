@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,16 +43,20 @@ var topography = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 
 // Coordinates array (lat-lon)
 
-// Markers
+// Markers confirmed & non confirmed
 var pnt = L.layerGroup(); 
-
 var unconfirm = L.layerGroup(); 
+
+// Markers cos50 & cos110
+var cos50 = L.layerGroup(); 
+var cos110= L.layerGroup(); 
+
 
 // Line
 //var line = L.polyline(coords, {color: "red", weight: 7}).bindPopup("Travel Path");
 
 // Map
-var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]});
+var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm,cos50,cos110]});
 
 // Description
 var legend = L.control({position: "bottomleft"});
@@ -70,6 +73,31 @@ legend.onAdd = function(map) {
     return div;
 };
 legend.addTo(map);
+
+
+var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/coastal/ne_50m_coastline.geojson'
+var coastal110 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/coastal/ne_110m_coastline.geojson'
+
+// create a leaflet map (you must have loaded leaflet first)
+
+fetch(
+  coastal50
+).then(
+  res => res.json()
+).then(
+  data => L.geoJSON(data, style = {"color": "#0000CD"}).addTo(cos50)
+)
+
+
+fetch(
+  coastal110
+).then(
+  res => res.json()
+).then(
+  data => L.geoJSON(data, style = {"color": "#8B008B"}).addTo(cos110)
+)
+
+
 
 
 // Load GeoJSON from an external file
@@ -90,21 +118,21 @@ getdata("https://script.google.com/macros/s/AKfycbzvqzDgrTVWyKDpAF9ymfObmgc6fWgX
 getdata("https://script.google.com/macros/s/AKfycbzlUi1Mw79iga74qqXjib5S_cfBSGmPHFDWspy4B-tNWGVsQuU/exec",arryz,unconfirm);
 
 function getdata(link,arryz,where){
-	fetch(link, requestOptions)
-  	.then(response => response.json())
-  	.then(result => arryz=result)
-  	.then(data => arryz = data)
-  	.then(() => updatemap(arryz,where))
-  	.catch(error => console.log('error', error));
+    fetch(link, requestOptions)
+    .then(response => response.json())
+    .then(result => arryz=result)
+    .then(data => arryz = data)
+    .then(() => updatemap(arryz,where))
+    .catch(error => console.log('error', error));
 }
 
 
 
 function updatemap(arryz,where){
-	for (let i = 0; i < arryz.geometries[0].coordinates[0].length; i++) 
- 	    {
-  			L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i]).addTo(where);
-		}
+    for (let i = 0; i < arryz.geometries[0].coordinates[0].length; i++) 
+        {
+            L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i]).addTo(where);
+        }
 }
 
 
@@ -120,10 +148,12 @@ var baseMaps = {
 };
 var overlayMaps = {
     "Confirmed": pnt,
-    "Unconfirmed" : unconfirm
+    "Unconfirmed" : unconfirm,
+    "Coastal : 50m": cos50,
+    "Coastal : 110m" : cos110
 };
-L.control.layers(baseMaps, overlayMaps, {position: "topleft", collapsed: false}).addTo(map);
-
+//L.control.layers(baseMaps, coastalline, {position: "topleft", collapsed: false}).addTo(map);
+L.control.layers(baseMaps,overlayMaps, {position: "topleft", collapsed: false}).addTo(map);
 
 
 
