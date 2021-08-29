@@ -65,7 +65,7 @@ legend.onAdd = function(map) {
 legend.addTo(map);
 
 
-var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastalbuffers/ne_50m_coastline.geojson'
+var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/rubber/rubber-dissolved.geojson' //rubber dissolved actually
 var coastal110 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 
 // create a leaflet map (you must have loaded leaflet first)
@@ -139,7 +139,7 @@ var baseMaps = {
 var overlayMaps = {
     "Confirmed": pnt,
     "Unconfirmed" : unconfirm,
-    "Coastal : 50m": cos50,
+    "Rubber plantations": cos50,
     "Coastal : 60 km buffer" : cos110
 };
 //L.control.layers(baseMaps, coastalline, {position: "topleft", collapsed: false}).addTo(map);
