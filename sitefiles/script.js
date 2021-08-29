@@ -65,8 +65,8 @@ legend.onAdd = function(map) {
 legend.addTo(map);
 
 
-var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/coastal/ne_50m_coastline.geojson'
-var coastal110 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
+var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastalbuffers/ne_50m_coastline.geojson'
+var coastal110 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 
 // create a leaflet map (you must have loaded leaflet first)
 
