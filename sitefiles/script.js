@@ -46,7 +46,7 @@ var cos110= L.layerGroup();
 //var line = L.polyline(coords, {color: "red", weight: 7}).bindPopup("Travel Path");
 
 // Map
-var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm,cos50,cos110]}).setView([10.833, 77.245], 7);
+var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]}).setView([10.833, 77.245], 7);
 
 // Description
 var legend = L.control({position: "bottomleft"});
