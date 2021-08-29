@@ -75,7 +75,7 @@ fetch(
 ).then(
   res => res.json()
 ).then(
-  data => L.geoJSON(data, style = {"color": "#0000CD"}).addTo(cos50)
+  data => L.geoJSON(data, style = {"color": "#228B22"}).addTo(cos50)
 )
 
 
