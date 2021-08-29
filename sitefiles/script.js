@@ -11,7 +11,7 @@ function main() {
 	var cos50 = L.layerGroup(); 
 	var cos110= L.layerGroup(); 
 
-    var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm,cos50,cos110]}).setView([10.833, 77.245], 7);;
+    var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]}).setView([10.833, 77.245], 7);;
    /// var map = L.map('map', {}).setView([49.5, 16], 14);
 
 
