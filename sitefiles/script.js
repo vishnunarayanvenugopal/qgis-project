@@ -2,25 +2,19 @@ jQuery(document).ready(main)
 
 function main() {
 
-/*	var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-	var topography = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
-	var pnt = L.layerGroup(); 
-	var unconfirm = L.layerGroup(); 
-
-	// Markers cos50 & cos110
-	var cos50 = L.layerGroup(); 
-	var cos110= L.layerGroup(); 
-
+/*  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
+  var topography = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+  var pnt = L.layerGroup(); 
+  var unconfirm = L.layerGroup(); 
+  // Markers cos50 & cos110
+  var cos50 = L.layerGroup(); 
+  var cos110= L.layerGroup(); 
     var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]}).setView([10.833, 77.245], 7);;
    /// var map = L.map('map', {}).setView([49.5, 16], 14);
-
-
   L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 16,
     atribution: 'Map data &copy; OSM.org'
   }).addTo(map);
-
-
 */
 
 
@@ -30,6 +24,7 @@ function main() {
 //let map = L.map("map", {center: [10.833, 77.245], zoom: 7});
 var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
 var topography = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
+var airquality = L.tileLayer('https://tiles.aqicn.org/tiles/usepa-aqi/{z}/{x}/{y}.png?token=847d225206311fa61b0bdc52e27ee8afdf462246', {attribution: 'World Air Quality Index project: &copy; <a href="https://aqicn.org/home/">link</a> contributors, <a href="https://aqicn.org/sources/">EPA sources</a> '});
 
 // Coordinates array (lat-lon)
 
@@ -65,13 +60,14 @@ legend.onAdd = function(map) {
 legend.addTo(map);
 
 
-var coastal50 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/rubber/rubber-dissolved.geojson' //rubber dissolved actually
-var coastal110 = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
+var rubberplantation = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/rubber/rubber-dissolved.geojson' //rubber dissolved actually
+var buffer60km = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
+//var airquality = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 
 // create a leaflet map (you must have loaded leaflet first)
 
 fetch(
-  coastal50
+  rubberplantation
 ).then(
   res => res.json()
 ).then(
@@ -80,7 +76,7 @@ fetch(
 
 
 fetch(
-  coastal110
+  buffer60km
 ).then(
   res => res.json()
 ).then(
@@ -137,8 +133,10 @@ var baseMaps = {
     "Topography": topography
 };
 var overlayMaps = {
+
     "Confirmed": pnt,
     "Unconfirmed" : unconfirm,
+    "Air Quality": airquality,
     "Rubber plantations": cos50,
     "Coastal : 60 km buffer" : cos110
 };
@@ -152,5 +150,3 @@ L.control.layers(baseMaps,overlayMaps, {position: "topleft", collapsed: false}).
 
 
 }
-
-
