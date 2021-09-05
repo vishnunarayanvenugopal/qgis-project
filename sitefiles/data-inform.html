@@ -1,11 +1,186 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <style>
+    html, body, #container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+body {
+  /* height of .navbar, customize with @navbar-height variable */
+  padding-top: 50px;
+}
+.navbar {
+  min-height: 50px;
+}
+#sidebar {
+  float: left;
+  height: 100%;
+  max-width: 100%;
+  width: 150px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+}
+#demo {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: auto;
+  padding-left: 200px;
+  padding-top: 50px;
+  padding-right: 50px;
+}
+.sidebar-wrapper {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+@media (max-width: 767px) {
+#sidebar {
+  display: none;
+}
+}
+
+.legend {
+            color: #333;
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            padding: 6px 21px 6px 21px;
+            background-color: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border: 2px solid rgba(0,0,0,0.2);
+            border-radius: 5px;
+        }
+        .legend h3 {
+            line-height: 5px;
+        }
+        .legend ul {
+            line-height: 15px;
+            padding-left: 20px;
+        }
+
+</style>
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+            <a href="..\index.html" > <i class="fa fa-home" style="font-size:15px;color:grey;text-shadow:2px 2px 4px #000000;"></i> Home</a>
+            </li>
+            <li>
+              <a href="slider.html"> <i class="fa fa-clock-o" style="font-size:15px;color:grey;text-shadow:2px 2px 4px #000000;"></i> Timeseries</a>
+            </li>
+
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="data-inform.html"><i class="fa fa-plus" style="font-size:15px;color:grey;text-shadow:2px 2px 4px #000000;"></i> Insert Data</a></li>
+        </ul>
+        </div>
+      </div>
+    </div>
+     <div id="container">
+      <div id="sidebar">
+        <div class="sidebar-wrapper">
+          <div id="features" class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">LeapFrog Cancer Study</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="demo" >
+  <center><h2 >Insert Data</h2></center>
+
+<form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off"> 
+<input id="mrdfield" name="entry.386824794" placeholder="Enter MRD Number" type="text" required /> 
+<input id="hisfield" name="entry.154395776" placeholder="Enter HIS Name" type="text" required /> 
+<input id="mobField" name="entry.177709340" placeholder="Enter your 10 Digit Phone Number" type="text" pattern="^\d{10}$" required />  
+<input id="pincodefield" name="entry.894458339" placeholder="Enter Pincode" type="text" required /> 
+ 
+<button id="send" type="submit" class="common_btn" >Submit</button>
+</form>
+
+<h3 id="success-msg" style="text-align: center !important; margin-top:190px !important; display:none; ">Inserted Sucessfully..!! Visualize on GIS</h3>
+  </div>
+
+    </div>
+
+  
+  
+
+
+
+
+
+
+
+<script>
+function postToGoogle() {
+                var field1 = $("#mrdfield").val();
+                var field2 = $("#hisfield").val();
+                var field3 = $("#mobField").val();
+var field4 = $("#pincodefield").val();
+var feild5 = "New";
+              
+        
+        if(field1 == ""){
+          alert('Please Enter MRD');
+          document.getElementById("mrdfield").focus();
+          return false;
+        }
+        if(field2 == ""){
+          alert('Please Fill HIS name');
+          document.getElementById("hisfield").focus();
+          return false;
+        }
+        if(field3 == "" || field3.length > 10 || field3.length < 10){
+          alert('Please Fill Your Mobile Number');
+          document.getElementById("mobField").focus();
+          return false;
+        }
+if(field4 == ""){
+          alert('Please Enter Pincode');
+          document.getElementById("pincodefield").focus();
+          return false;
+        }
+
+
+        
+  
+                $.ajax({
+                    url: "https://docs.google.com/forms/d/e/1FAIpQLSf0rhi8YVnqnzJvF4-FL21WOyQKZSmWE803yWKB-HRWAP5G2Q/formResponse?",
+          data: {"entry.386824794": field1, "entry.154395776": field2, "entry.177709340": field3, "entry.894458339": field4,"entry.743171648": feild5},
+                    type: "POST",
+                    dataType: "xml",
+                    success: function(d)
+          {
+          },
+          error: function(x, y, z)
+            {
+
+              $('#success-msg').show();
+              $('#form').hide();
+              
+            }
+                });
+
+
+        return false;
+            }
+</script>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+#demo form {border: 3px solid #f1f1f1;}
 
-input[type=text], input[type=pincode], select {
+input[type=text], input[type=email], select {
   width: 49%;
   font-size:20px;
   padding: 12px 20px;
@@ -15,7 +190,7 @@ input[type=text], input[type=pincode], select {
   box-sizing: border-box;
 }
 
-button {
+#demo button {
   background-color: #4CAF50;
   color: white;
   padding: 14px 20px;
@@ -25,31 +200,31 @@ button {
   width: 100%;
 }
 
-button:hover {
+#demo button:hover {
   opacity: 0.8;
 }
 
-.cancelbtn {
+#demo .cancelbtn {
   width: auto;
   padding: 10px 18px;
   background-color: #f44336;
 }
 
-.imgcontainer {
+#demo .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
 }
 
-img.avatar {
+#demo img.avatar {
   width: 20%;
   border-radius: 50%;
 }
 
-.container {
+#demo .container {
   padding: 16px;
 }
 
-span.psw {
+#demo span.psw {
   float: right;
   padding-top: 16px;
 }
@@ -64,73 +239,6 @@ span.psw {
      width: 100%;
   }
 }
+
+
 </style>
-
-
-<center><h2 >Upload Data</h2></center>
-
-<form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off"> 
-<input id="nameField" name="entry.386824794" placeholder="Enter Patient ID" type="text" required> 
-<input id="pincode" name="entry.633133795" placeholder="Enter Pincode" type="pincode" required> 
-<input id="mobField" name="entry.177709340" placeholder="Enter your 10 Digit Phone Number" type="text" pattern="^\d{10}$" required>  
-<input id="HISname" name="entry.154395776" placeholder="Enter Hospital Information System ID" type="text" required> 
- 
-<button id="send" type="submit" class="common_btn">Submit</button>
-</form>
-
-<h3 id="success-msg" style="text-align: center !important; margin-top:190px !important; display:none; "> Data Insertion Completed!!</h3>
-
-
-
-
-<script>
-function postToGoogle() {
-                var field1 = $("#nameField").val();
-                var field2 = $("#pincode").val();
-                var field3 = $("#mobField").val();
-var field4 = $("#HISname").val();
-              
- 				
-				if(field1 == ""){
-					alert('Please Fill Your Name');
-					document.getElementById("nameField").focus();
-					return false;
-				}
-				if(field2 == ""){
-					alert('Please Fill Your Email');
-					document.getElementById("pincode").focus();
-					return false;
-				}
-				if(field3 == "" || field3.length > 10 || field3.length < 10){
-					alert('Please Fill Your Mobile Number');
-					document.getElementById("mobField").focus();
-					return false;
-				}
-if(field4 == ""){
-					alert('Please Enter Question');
-					document.getElementById("HISname").focus();
-					return false;
-				}
-
-
-				
-	
-                $.ajax({
-                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSf0rhi8YVnqnzJvF4-FL21WOyQKZSmWE803yWKB-HRWAP5G2Q/formResponse?",
-					data: {"entry.386824794": field1, "entry.633133795": field2, "entry.177709340": field3, "entry.154395776": field4},
-                    type: "POST",
-                    dataType: "xml",
-                    success: function(d)
-					{
-					},
-					error: function(x, y, z)
-						{
-
-							$('#success-msg').show();
-							$('#form').hide();
-							
-						}
-                });
-				return false;
-            }
-</script>
