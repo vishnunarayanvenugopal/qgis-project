@@ -100,7 +100,8 @@ body {
 <input id="hisfield" name="entry.154395776" placeholder="Enter HIS Name" type="text" required /> 
 <input id="yearfield" name="entry.177709340" placeholder="Enter Year" type="text"  required />  
 <input id="pincodefield" name="entry.894458339" placeholder="Enter Pincode" type="text" required /> 
- 
+<input id="confirmedfield" name="entry.1701443421" placeholder="Confirmed ? (Yes/No)" type="text" required /> 
+
 <button id="send" type="submit" class="common_btn" >Submit</button>
 </form>
 
@@ -125,6 +126,7 @@ function postToGoogle() {
                 var field3 = $("#yearfield").val();
 var field4 = $("#pincodefield").val();
 var feild5 = "New";
+var feild6 = $("#confirmedfield").val().toLowerCase();
               
         
         if(field1 == ""){
@@ -147,13 +149,18 @@ if(field4 == ""){
           document.getElementById("pincodefield").focus();
           return false;
         }
+        if(feild6 == "" ){
+          alert('Please Enter Yes/No');
+          document.getElementById("confirmedfield").focus();
+          return false;
+        }
 
 
         
   
                 $.ajax({
                     url: "https://docs.google.com/forms/d/e/1FAIpQLSf0rhi8YVnqnzJvF4-FL21WOyQKZSmWE803yWKB-HRWAP5G2Q/formResponse?",
-          data: {"entry.386824794": field1, "entry.154395776": field2, "entry.177709340": field3, "entry.894458339": field4,"entry.743171648": feild5},
+          data: {"entry.386824794": field1, "entry.154395776": field2, "entry.177709340": field3, "entry.894458339": field4,"entry.743171648": feild5,"entry.1701443421": feild6},
                     type: "POST",
                     dataType: "xml",
                     success: function(d)
