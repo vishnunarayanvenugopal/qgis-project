@@ -98,7 +98,7 @@ body {
 <form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off"> 
 <input id="mrdfield" name="entry.386824794" placeholder="Enter MRD Number" type="text" required /> 
 <input id="hisfield" name="entry.154395776" placeholder="Enter HIS Name" type="text" required /> 
-<input id="mobField" name="entry.177709340" placeholder="Enter your 10 Digit Phone Number" type="text" pattern="^\d{10}$" required />  
+<input id="yearfield" name="entry.177709340" placeholder="Enter Year" type="text"  required />  
 <input id="pincodefield" name="entry.894458339" placeholder="Enter Pincode" type="text" required /> 
  
 <button id="send" type="submit" class="common_btn" >Submit</button>
@@ -122,7 +122,7 @@ body {
 function postToGoogle() {
                 var field1 = $("#mrdfield").val();
                 var field2 = $("#hisfield").val();
-                var field3 = $("#mobField").val();
+                var field3 = $("#yearfield").val();
 var field4 = $("#pincodefield").val();
 var feild5 = "New";
               
@@ -139,7 +139,7 @@ var feild5 = "New";
         }
         if(field3 == "" || field3.length > 10 || field3.length < 10){
           alert('Please Fill Your Mobile Number');
-          document.getElementById("mobField").focus();
+          document.getElementById("yearfield").focus();
           return false;
         }
 if(field4 == ""){
