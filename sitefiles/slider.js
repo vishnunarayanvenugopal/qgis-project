@@ -16,7 +16,7 @@ function main() {
          //change the file url to match yours
          $.getJSON("https://raw.githubusercontent.com/neiugis/lab7_map/main/city.geojson")
          .done(function(data) {
-         	 console.log("ok")
+           console.log("ok")
           //  var info = processData(data);
             //console.log(info.timestamps)
             // console.log(info)
@@ -50,18 +50,25 @@ fetched=getdata("https://script.google.com/macros/s/AKfycbzvqzDgrTVWyKDpAF9ymfOb
  
 
 function getdata(link,arryz,where){
-	fetch(link, requestOptions)
-  	.then(response => response.json())
-  	.then(result => arryz=result)
-  	.then(data =>  {
-  					  var years = [...new Set(arryz.geometries[0].years[0])].sort();
-  					  var yeartodraw=years[0]
-  	                  info = updatemap(arryz,map,years,yeartodraw,flag=1);
-  	                  
-  	               })
+  fetch(link, requestOptions)
+    .then(response => response.json())
+    .then(result => arryz=result)
+    .then(data =>  {
+              var years=[]
+              for(let i = 0; i < arryz.geometries[0].years[0].length; i++)
+              {
+                      years.push(arryz.geometries[0].years[0][i].replace("ok",""))
 
-  	//.then(() => updatemap(arryz,where))
-	.then(function(data) {
+              }
+              var temp= [...new Set(years)];
+              years=temp.sort();
+              var yeartodraw=years[0]
+                      info = updatemap(arryz,map,years,yeartodraw,flag=1);
+                      
+                   })
+
+    //.then(() => updatemap(arryz,where))
+  .then(function(data) {
            //  var info = updatemap(arryz,map);
              //console.log(info.timestamps)
              
@@ -69,51 +76,55 @@ function getdata(link,arryz,where){
             // createPropSymbols(info.timestamps, data);
           //   createSliderUI(info.timestamps);
          })
-  	.catch(error => console.log('error', error)
-  		);
-  	
-  	
+    .catch(error => console.log('error', error)
+      );
+    
+    
 }
 
 
 
 function updatemap(arryz,where,years,yeartodraw,flag=0){
 
-//	console.log(arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)])
+//  console.log(arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)])
 
-	for (let i = 0; i < arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)].length; i++) 
- 	    {
+  if (typeof arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)] !== 'undefined')
+  {
+        for (let i = 0; i < arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)].length; i++) 
+      {
 
- 	    	var min=1 //make it to count of patient in pincode later
- 	    	var max=1 //make it to count of patient in pincode later
+        var min=1 //make it to count of patient in pincode later
+        var max=1 //make it to count of patient in pincode later
 
- 	    	var temp=arryz.geometries[0].names[0][arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)][i]]+"<br>"+yeartodraw
-  		//	L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(temp).addTo(where);
-  			
-  			circlemakers(arryz.geometries[0].coordinates[0][arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)][i]],map,temp,layerGroup)
+        var temp=arryz.geometries[0].names[0][arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)][i]].replace("ok", "")+"<br>"+yeartodraw.replace("ok", "")
+      //  L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(temp).addTo(where);
+        
+        circlemakers(arryz.geometries[0].coordinates[0][arryz.geometries[0].yearoccu[0][years.indexOf(yeartodraw)][i]],map,temp,layerGroup)
 
 
 
        // markers.clearLayers();
 
 
-		}
-		//updatePropSymbols(years[0]);
+    }
+  }
+  
+    //updatePropSymbols(years[0]);
 
 
-	/*	 function clearmarks() 
-		 {
-		 	markers.clearLayers();
-		 } */
+  /*   function clearmarks() 
+     {
+      markers.clearLayers();
+     } */
 
-	//	 createTimeLabel(years[0])
-		if(flag==1)
-		{
-			createSliderUI(years,layerGroup,arryz)
-		}
-	    
+  //   createTimeLabel(years[0])
+    if(flag==1)
+    {
+      createSliderUI(years,layerGroup,arryz)
+    }
+      
 
-		return { // the function finally returns the timestamps array, the min and max of population data
+    return { // the function finally returns the timestamps array, the min and max of population data
               timestamps : years,
               min : min,
               max : max
@@ -124,7 +135,7 @@ function updatemap(arryz,where,years,yeartodraw,flag=0){
 
 function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
 {
-	L.circleMarker(loc.split(",").map(Number), { // we use circle marker for the points
+  L.circleMarker(loc.split(",").map(Number), { // we use circle marker for the points
                       fillColor: "#501e65",  // fill color of the circles
                       color: '#501e65',      // border color of the circles
                       weight: 2,             // circle line weight in pixels
@@ -143,7 +154,7 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
 
 
          return layerGroup
-	/*L.circleMarker(loc.split(",").map(Number), { // we use circle marker for the points
+  /*L.circleMarker(loc.split(",").map(Number), { // we use circle marker for the points
                       fillColor: "#501e65",  // fill color of the circles
                       color: '#501e65',      // border color of the circles
                       weight: 2,             // circle line weight in pixels
@@ -158,8 +169,6 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
                             this.setStyle({fillColor: '#501e65'});  // fill turns original color when mouseout
                         }
                 }).bindPopup(popup).addTo(where);
-
-
 */
 }
 
@@ -168,34 +177,34 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
           var checkbox = L.control({position: 'bottomleft'});
           var checked=0
 
-          	checkbox.onAdd = function (map) {
+            checkbox.onAdd = function (map) {
              var div = L.DomUtil.create('div', 'checkbox');
               div.innerHTML = '<form style="padding-left: 20px;"><input id="checkbox" type="checkbox"/>Show Previous</form>'; 
-   			 return div;
-											};
+         return div;
+                      };
 
 
-			checkbox.addTo(map);
+      checkbox.addTo(map);
 
-			function handleCommand() 
-					{
-						if(this.checked==false)
-						{
-							checked=0
-						}
-						else
-						{
-							checked=1
-						}
+      function handleCommand() 
+          {
+            if(this.checked==false)
+            {
+              checked=0
+            }
+            else
+            {
+              checked=1
+            }
 
-					}
+          }
 
 
-                	document.getElementById ("checkbox").addEventListener ("click", handleCommand, false);
+                  document.getElementById ("checkbox").addEventListener ("click", handleCommand, false);
 
-			
-			
-			
+      
+      
+      
 
                             // Another use of L.control :)
           sliderControl.onAdd = function(map) {
@@ -209,13 +218,15 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
             // Define the labels of the time slider as an array of strings
             // Modify this for your data
             var yearlist = [];
-			for (var i = 2019; i <= 2021; i++)        //generate lower year ranges
+            var minyear=timestamps[0];
+            var maxyear=timestamps[timestamps.length-1];
+      for (var i = minyear; i <= maxyear; i++)        //generate lower year ranges
 
-			{
-    			yearlist.push(i);
-			}
+      {
+          yearlist.push(i.toString());
+      }
 
-            var labels = timestamps;
+            var labels = yearlist;
 
             $(slider)
                 .attr({
@@ -227,23 +238,25 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
                 })
                 .on('input change', function() {
 
-                	//console.log("changed to",$(this).val().toString())
+                  //console.log("changed to",$(this).val().toString())
 
-                	if(checked==0)
-                	{
-                		layerGroup.clearLayers();
-                	}
-
-                	updatemap(data,map,timestamps,$(this).val())
-
-
-
-
-                	
+                  if(checked==0)
+                  {
+                    layerGroup.clearLayers();
+                  }
 
                   //  updatePropSymbols($(this).val().toString()); // automatic update the map for the timestamp
-                    var i = $.inArray(this.value,timestamps);
+                    var i = $.inArray(this.value,labels);
                     $(".temporal-legend").text(labels[i]); // automatic update the label for the timestamp
+
+                  updatemap(data,map,timestamps,$(this).val())
+
+
+
+
+                  
+
+                  
                 });
             return slider;
           }
