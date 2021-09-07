@@ -117,7 +117,7 @@ function getdata(link,arryz,where){
 function updatemap(arryz,where){
     for (let i = 0; i < arryz.geometries[0].coordinates[0].length; i++) 
         {
-            L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i]).addTo(where);
+            L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i].replace("ok","")).addTo(where);
         }
 }
 
