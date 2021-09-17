@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2021-09-17T03:40:06.781Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="NhQnSii7ZIymcnOr02il" version="15.2.9">
+  <diagram id="oyA2DqAjfWKmw0BYHq3G" name="Page-1">
+    <mxGraphModel dx="868" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-1" value="Database" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="90" y="330" width="340" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-6" value="" style="shape=flexArrow;endArrow=classic;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fillColor=#cce5ff;strokeColor=#36393d;" parent="1" target="MOL_MBWJx1vp4VGH-Oje-12" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="330" as="sourcePoint" />
+            <mxPoint x="310" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-12" value="Geoviews" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cdeb8b;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="90" y="240" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-13" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="480" y="400" as="sourcePoint" />
+            <mxPoint x="480" y="20" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-14" value="Leaflet Map Wrapper" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+          <mxGeometry x="485" y="40" width="305" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-7" value="New &lt;br&gt;Data Input" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="710" y="100" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-15" value="Client Side Browser" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="530" y="10" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-17" value="&lt;span&gt;Opensource Server Tile&lt;br&gt;&amp;nbsp;Layers&lt;/span&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="220" y="30" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-18" value="" style="shape=flexArrow;endArrow=classic;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="395" y="70" as="sourcePoint" />
+            <mxPoint x="485" y="70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-20" value="Leaflet&lt;br&gt;Library" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="560" y="100" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-19" value="BBox Strategy" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="500" y="90" width="70" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-21" value="GeoJSON&lt;br&gt;Visualization" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="630" y="90" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-22" value="Server Side" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="265" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-23" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="570" y="220" width="140" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-24" value="Interactive Map" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="240" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-27" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" target="MOL_MBWJx1vp4VGH-Oje-19" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="220" y="140" as="sourcePoint" />
+            <mxPoint x="450" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-28" value="Query" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="330" y="110" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-29" value="Response" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=0;" parent="1" vertex="1">
+          <mxGeometry x="320" y="140" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-30" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;exitX=0.436;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" source="MOL_MBWJx1vp4VGH-Oje-23" target="MOL_MBWJx1vp4VGH-Oje-21" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="590" y="250" as="sourcePoint" />
+            <mxPoint x="690" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-31" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;fillColor=#cce5ff;strokeColor=#36393d;" parent="1" source="MOL_MBWJx1vp4VGH-Oje-12" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="160" y="240" as="sourcePoint" />
+            <mxPoint x="150" y="171" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-32" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="240" y="180" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-33" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="230" y="185" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-34" value="Geodata Array" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#eeeeee;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="220" y="190" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-35" value="Geocluster Algorithms" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#cdeb8b;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="100" y="120" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-39" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;fillColor=#cce5ff;strokeColor=#36393d;" parent="1" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="310" y="320" as="sourcePoint" />
+            <mxPoint x="460" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-40" value="Data insert" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-45;" parent="1" vertex="1">
+          <mxGeometry x="330" y="220" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-41" value="Relational" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;rotation=-45;" parent="1" vertex="1">
+          <mxGeometry x="360" y="250" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MOL_MBWJx1vp4VGH-Oje-42" value="GeoJSON" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;fillColor=#ffff88;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="430" y="250" width="90" height="50" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
