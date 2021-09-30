@@ -154,10 +154,28 @@ h3{font-size:24px;}
 
 <form id="form" target="_self" onsubmit="return postToGoogle();" action="" autocomplete="off"> 
 <input id="mrdfield" name="entry.386824794" placeholder="Enter MRD Number" type="text" required /> 
-<input id="hisfield" name="entry.154395776" placeholder="Enter HIS Name" type="text" required /> 
-<input id="yearfield" name="entry.177709340" placeholder="Enter Year" type="text"  required />  
+
+<!-- <input id="hisfield" name="entry.154395776" placeholder="Enter HIS Name" type="text" required /> -->
+
+ <select id="hisfield" name="entry.154395776"  >
+    <option disabled selected hidden required>Choose HIS</option>
+    <option value="Amrita">Amrita</option>
+  </select>
+
+<!-- <input id="yearfield" name="entry.177709340" placeholder="Enter Year" type="text"  required /> -->
+
+<select id="yearfield" name="entry.177709340"> <option disabled selected hidden required>Select Year</option></select> 
+
+
 <input id="pincodefield" name="entry.894458339" placeholder="Enter Pincode" type="text" required /> 
-<input id="confirmedfield" name="entry.1701443421" placeholder="Confirmed ? (Yes/No)" type="text" required /> 
+
+<!-- <input id="confirmedfield" name="entry.1701443421" placeholder="Confirmed ? (Yes/No)" type="text" required /> -->
+
+ <select id="confirmedfield" name="entry.1701443421"  >
+    <option disabled selected hidden required>Confirmed ? (Yes/No)</option>
+    <option value="yes">Yes</option>
+    <option value="no">No</option>
+  </select> 
 
 <button id="send" type="submit" class="common_btn" >Submit</button>
 </form>
@@ -194,19 +212,27 @@ function postToGoogle() {
                 var field3 = $("#yearfield").val();
 var field4 = $("#pincodefield").val();
 var feild5 = "New";
-var feild6 = $("#confirmedfield").val().toLowerCase();
+var feild6 = $("#confirmedfield").val();
               
         
-        if(field1 == ""){
+        if(field1 == "")
+        {
           alert('Please Enter MRD');
           document.getElementById("mrdfield").focus();
           return false;
         }
-        if(field2 == ""){
-          alert('Please Fill HIS name');
-          document.getElementById("hisfield").focus();
-          return false;
-        }
+
+
+		if(typeof field2 != 'string')
+        {
+    		alert("Please Select HIS");
+    		document.getElementById("hisfield").focus();
+    		return false;
+   		}
+
+
+
+
         if(field3 == "" || field3.length > 4 || field3.length < 4){
           alert('Please Fill Year');
           document.getElementById("yearfield").focus();
@@ -217,11 +243,13 @@ if(field4 == ""){
           document.getElementById("pincodefield").focus();
           return false;
         }
-        if(feild6 == "" ){
-          alert('Please Enter Yes/No');
-          document.getElementById("confirmedfield").focus();
-          return false;
-        }
+
+        if(typeof feild6 != 'string')
+        {
+    		alert("Please Select Yes or No");
+    		document.getElementById("confirmedfield").focus();
+    		return false;
+   		}
 
 
         
@@ -248,7 +276,23 @@ if(field4 == ""){
             }
 </script>
 
-
+<script type="text/javascript">
+    window.onload = function () {
+        //Reference the DropDownList.
+        var ddlYears = document.getElementById("yearfield");
+ 
+        //Determine the Current Year.
+        var currentYear = (new Date()).getFullYear();
+ 
+        //Loop and add the Year values to DropDownList.
+        for (var i = 1950; i <= currentYear; i++) {
+            var option = document.createElement("OPTION");
+            option.innerHTML = i;
+            option.value = i;
+            ddlYears.appendChild(option);
+        }
+    };
+</script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
