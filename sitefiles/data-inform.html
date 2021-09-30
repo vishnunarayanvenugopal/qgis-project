@@ -231,13 +231,15 @@ var feild6 = $("#confirmedfield").val();
    		}
 
 
+   		if(typeof field3 != 'string')
+        {
+    		alert("Please Fill Year");
+    		document.getElementById("yearfield").focus();
+    		return false;
+   		}
 
 
-        if(field3 == "" || field3.length > 4 || field3.length < 4){
-          alert('Please Fill Year');
-          document.getElementById("yearfield").focus();
-          return false;
-        }
+       
 if(field4 == ""){
           alert('Please Enter Pincode');
           document.getElementById("pincodefield").focus();
