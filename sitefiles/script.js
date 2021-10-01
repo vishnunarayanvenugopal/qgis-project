@@ -1,5 +1,7 @@
 jQuery(document).ready(main)
 
+
+
 function main() {
 
 /*  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
@@ -121,7 +123,30 @@ function updatemap(arryz,where){
         }
 }
 
+/////////////////////////////////////////////////////////Radioactivity datapoints////////////////////////////////////////////////////////////////////////////////////
 
+var LeafIcon = L.Icon.extend({
+    options: {
+      shadowUrl: 'sitefiles/img/leaf-shadow.png',
+      iconSize:     [25, 25],
+      shadowSize:   [0, 0],
+      iconAnchor:   [22, 94],
+      shadowAnchor: [4, 62],
+      popupAnchor:  [-3, -76]
+    }
+  });
+
+  var greenIcon = new LeafIcon({iconUrl: 'sitefiles/img/radioactive.png'});
+
+  //,
+  //  redIcon = new LeafIcon({iconUrl: 'leaf-red.png'}),
+ //   orangeIcon = new LeafIcon({iconUrl: 'leaf-orange.png'});
+
+  L.marker([8.9753950, 76.5348376], {icon: greenIcon}).bindPopup("Chavara - Natural Radioactivity").addTo(map);
+  L.marker([8.9428812, 76.5386280], {icon: greenIcon}).bindPopup("Neendakara - Natural Radioactivity").addTo(map);
+   L.marker([9.9412805, 76.3359475], {icon: greenIcon}).bindPopup("Poonithura - Natural Radioactivity").addTo(map);
+  
+  
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 setTimeout(() => {  console.log(getdata()); }, 10000);
