@@ -115,11 +115,36 @@ function getdata(link,arryz,where){
 }
 
 
+function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
+{
+  L.circleMarker(loc.split(",").map(Number), { // we use circle marker for the points
+                      fillColor: "#FF5733 ",  // fill color of the circles
+                      color: '#880808',  // border color of the circles
+                      radius: 5,      
+                      weight: 2,             // circle line weight in pixels
+                      fillOpacity: 0.5       // fill opacity (0-1)
+                  }).on({
+                        mouseover: function(e) {
+                            this.openPopup();
+                            this.setStyle({fillColor: 'green'});  // fill color turns green when mouseover
+                        },
+                        mouseout: function(e) {
+                            this.closePopup();
+                            this.setStyle({fillColor: '#FF5733'});  // fill turns original color when mouseout
+                        }
+                }).bindPopup(popup).addTo(layerGroup);
+
+         return layerGroup
+}
+
+
 
 function updatemap(arryz,where){
     for (let i = 0; i < arryz.geometries[0].coordinates[0].length; i++) 
         {
-            L.marker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i].replace("ok","")).addTo(where);
+
+            circlemakers(arryz.geometries[0].coordinates[0][i],where,arryz.geometries[0].names[0][i].replace("ok",""),where)
+           // L.circleMarker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i].replace("ok","")).addTo(where);
         }
 }
 
