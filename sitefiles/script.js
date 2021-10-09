@@ -45,6 +45,7 @@ var cos110= L.layerGroup();
 // Map
 var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]}).setView([10.833, 77.245], 7);
 
+
 // Description
 var legend = L.control({position: "bottomleft"});
 legend.onAdd = function(map) {
@@ -60,6 +61,46 @@ legend.onAdd = function(map) {
     return div;
 };
 legend.addTo(map);
+
+//////////////////////////////////////////////Sidebar Start///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+ var sidebar = L.control.sidebar('sidebar', {
+            closeButton: true,
+            position: 'right'
+        });
+        map.addControl(sidebar);
+
+setTimeout(function () {
+            sidebar.hide();
+        }, 500);
+
+ map.on('click', function () {
+            sidebar.hide();
+        })
+
+        sidebar.on('show', function () {
+           // console.log('Sidebar will be visible.');
+        });
+
+        sidebar.on('shown', function () {
+            //console.log('Sidebar is visible.');
+        });
+
+        sidebar.on('hide', function () {
+           // console.log('Sidebar will be hidden.');
+        });
+
+        sidebar.on('hidden', function () {
+            //console.log('Sidebar is hidden.');
+        });
+
+        L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+            //console.log('Close button clicked.');
+        });
+
+/////////////////////////////////////////////////////////sidebar end//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 var rubberplantation = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/rubber/rubber-dissolved.geojson' //rubber dissolved actually
@@ -114,6 +155,29 @@ function getdata(link,arryz,where){
     .catch(error => console.log('error', error));
 }
 
+/////////////////////////////////////////////////////////API request custom patient data///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+var header1 = new Headers();
+
+var arryz1
+getpatientdata("https://script.google.com/macros/s/AKfycbyI1JbOfteRSxzw1WuH76RoHyuQsG5_nMj_yA8kBKKVczaChzeb/exec",arryz1,raw);
+
+function getpatientdata(link,arryz1,raw){
+    fetch(link, {
+  method: 'POST',
+  headers: header1,
+  body: raw,
+  redirect: 'follow'
+})
+    .then(response => response.json())
+    .then(result => arryz1=result)
+    .then(data => arryz1 = data)
+    .then(() => sidebar.setContent(GenerateTable(arryz1)))
+    .catch(error => console.log('error', error));
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
 {
@@ -131,7 +195,12 @@ function circlemakers(loc,where,popup,layerGroup)   //vishnu defined
                         mouseout: function(e) {
                             this.closePopup();
                             this.setStyle({fillColor: '#FF5733'});  // fill turns original color when mouseout
-                        }
+                        },
+                        click: function (e) {
+                                                sidebar.show();
+                                                sidebar.setContent("<div id=\"dvTable\">Loading..<\/div>");
+                                                getpatientdata("https://script.google.com/macros/s/AKfycbyI1JbOfteRSxzw1WuH76RoHyuQsG5_nMj_yA8kBKKVczaChzeb/exec",arryz1,popup);
+        }
                 }).bindPopup(popup).addTo(layerGroup);
 
          return layerGroup
@@ -147,6 +216,40 @@ function updatemap(arryz,where){
            // L.circleMarker(arryz.geometries[0].coordinates[0][i].split(",").map(Number)).bindPopup(arryz.geometries[0].names[0][i].replace("ok","")).addTo(where);
         }
 }
+
+/////////////////////////////////////////////////////////generate table from JSON//////////////////////////////////////////////////////////////////////////////
+
+ function GenerateTable(json) {
+ 
+        //Create a HTML Table element.
+        var table = document.createElement("TABLE");
+        table.border = "1";
+ 
+ var includethis=["MRD","Age","District","Coastal","Gender","Obesity","Alcohol","Smoking","DOD","DOE","Mortality","Name"];
+
+for (var property in json) {
+
+  if (includethis.includes(property))
+  {
+        row = table.insertRow(-1);
+      var cell = row.insertCell(-1);
+      cell.innerHTML = property;
+      var cell = row.insertCell(-1);
+      cell.innerHTML = json[property];
+      //  console.log(property,":",json[property]);
+  }
+  
+}
+ 
+ 
+      //  var dvTable = document.getElementById("dvTable");
+      //  dvTable.innerHTML = "";
+      //  sidebar.setContent("table");
+     //   dvTable.appendChild(table);
+
+     return(table)
+
+    }
 
 /////////////////////////////////////////////////////////Radioactivity datapoints////////////////////////////////////////////////////////////////////////////////////
 
@@ -170,11 +273,8 @@ var LeafIcon = L.Icon.extend({
   L.marker([8.9753950, 76.5348376], {icon: greenIcon}).bindPopup("Chavara - Natural Radioactivity").addTo(map);
   L.marker([8.9428812, 76.5386280], {icon: greenIcon}).bindPopup("Neendakara - Natural Radioactivity").addTo(map);
    L.marker([9.9412805, 76.3359475], {icon: greenIcon}).bindPopup("Poonithura - Natural Radioactivity").addTo(map);
-  
-  
 
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-setTimeout(() => {  console.log(getdata()); }, 10000);
 //console.log()
 
 // Layer control
@@ -192,11 +292,5 @@ var overlayMaps = {
 };
 //L.control.layers(baseMaps, coastalline, {position: "topleft", collapsed: false}).addTo(map);
 L.control.layers(baseMaps,overlayMaps, {position: "topleft", collapsed: false}).addTo(map);
-
-
-
-
-
-
 
 }
