@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="sitefiles/css/bootstrap.min.css" />
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 
  <style type="text/css">html, body {
@@ -40,6 +40,25 @@
 </style>
    
 <style>
+
+  /*! CSS Used from: http://turbo87.github.io/leaflet-sidebar/src/L.Control.Sidebar.css */
+
+.leaflet-sidebar .close {
+  position: absolute !important;
+  right: 20px !important;
+  top: 20px !important;
+  width: 31px !important;
+  height: 31px !important;
+  color: #333 !important;
+  font-size: 25pt !important;
+  line-height: 1em !important;
+  text-align: center !important;
+  background: white !important;
+  -webkit-border-radius: 16px !important;
+  border-radius: 16px !important;
+  cursor: pointer !important;
+  z-index: 800 !important;
+}
 
  
 body {
@@ -122,6 +141,27 @@ h3{font-size:24px;}
 .panel-default{border-color:#ddd;     margin-bottom: 5px;
 }
 .panel-default>.panel-heading{color:#333;background-color:#f5f5f5;border-color:#ddd;}
+
+
+
+
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.responsive-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 </style>
 </head>
 <body>
@@ -131,9 +171,10 @@ h3{font-size:24px;}
 
 <div class="topnav" id="myTopnav">
   <a href="../index.html" > <i class="fa fa-home" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i> Home</a>
-  <a href="slider.html" class="active"><i class="fa fa-history" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i>Timeseries</a>
+  <a href="slider.html"><i class="fa fa-history" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i>Timeseries</a>
   <div class="topnav-right" id="myTopnav-right">
-    <a href="dashboard.html"><i class="fas fa-chart-line" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i> Dashboard</a>
+
+    <a href="#" class="active"><i class="fas fa-chart-line" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i> Dashboard</a>
     <a href="data-inform.html"><i class="fa fa-plus" style="font-size:15px;color:white;text-shadow:2px 2px 4px #000000;"></i> Insert</a>
   </div>
   
@@ -141,7 +182,8 @@ h3{font-size:24px;}
     <i class="fa fa-bars"></i>
   </a>
 </div>
-<div id="sidebar">
+
+<div id="sidebarmain">
         <div class="sidebar-wrapper">
           <div id="features" class="panel panel-default" >
             <div class="panel-heading">
@@ -151,12 +193,11 @@ h3{font-size:24px;}
         </div>
       </div>
 
- <div id="map"></div>
-   
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-  <!--  <script src="http://leaflet.github.io/Leaflet.label/leaflet.label.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js" integrity="sha512-Abr21JO2YqcJ03XGZRPuZSWKBhJpUAR6+2wH5zBeO4wAw4oksr8PRdF+BKIRsxvCdq+Mv4670rZ+dLnIyabbGw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="slider.js"></script>
+  
+
+ <div class="container"> 
+  <iframe class="responsive-iframe" src="https://datastudio.google.com/embed/reporting/34b9834d-8ba8-432c-af56-21df81d55d36/page/F3YcC" allowfullscreen></iframe>
+</div>
 
 <script>
 function myFunction() {
@@ -179,3 +220,4 @@ function myFunction() {
 
 </body>
 </html>
+
