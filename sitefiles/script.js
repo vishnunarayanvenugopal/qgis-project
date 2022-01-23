@@ -4,24 +4,6 @@ jQuery(document).ready(main)
 
 function main() {
 
-/*  var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-  var topography = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'});
-  var pnt = L.layerGroup(); 
-  var unconfirm = L.layerGroup(); 
-  // Markers cos50 & cos110
-  var cos50 = L.layerGroup(); 
-  var cos110= L.layerGroup(); 
-    var map = L.map('map', {center: [10.833, 77.245], zoom: 7.4, layers: [osm, pnt , unconfirm]}).setView([10.833, 77.245], 7);;
-   /// var map = L.map('map', {}).setView([49.5, 16], 14);
-  L.tileLayer('http://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 16,
-    atribution: 'Map data &copy; OSM.org'
-  }).addTo(map);
-*/
-
-
-
-
 // Tile layer
 //let map = L.map("map", {center: [10.833, 77.245], zoom: 7});
 var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
@@ -61,6 +43,28 @@ legend.onAdd = function(map) {
     return div;
 };
 legend.addTo(map);
+
+function updatecountcosrub(coastalcount,rubbercount,arraystruct)
+{
+  itertrack+=1;
+  totalcount+=arraystruct.length;
+  if(itertrack==2)
+  {
+    var legend = L.control({position: "bottomright"});
+    legend.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "legend");
+    div.innerHTML = 
+        '<h5>Layer Counts</h5>' +
+        '<ul>' +
+        '<li>Total : '+totalcount +
+        '<li>Coastal : '+coastalcount +
+        '<li>Rubber : '+rubbercount +
+        '</ul>'
+    return div;
+    };
+  legend.addTo(map);
+  }
+}
 
 //////////////////////////////////////////////Sidebar Start///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -107,7 +111,22 @@ var rubberplantation = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project
 var buffer60km = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 //var airquality = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 
-// create a leaflet map (you must have loaded leaflet first)
+//for count data
+var layercoastalforcount;
+var layerrubberplantation;
+
+var coastalcount=0;
+var rubbercount=0;
+var totalcount=0;
+var itertrack=0;
+
+$.getJSON(rubberplantation, function(json){
+    layerrubberplantation = json;
+});
+
+$.getJSON(buffer60km, function(json){
+    layercoastalforcount = json;
+});
 
 fetch(
   rubberplantation
@@ -127,7 +146,20 @@ fetch(
 )
 
 
+function returncountonlayer(Geojsonvar,arraystruct)
+{
 
+  var count=0;
+
+  for (var i = arraystruct.length - 1; i >= 0; i--) 
+  {
+      if(d3.geoContains(Geojsonvar,arraystruct[i].split(",").map(Number).reverse()))
+      {
+      count++;
+      }
+  }
+  return count;
+}
 
 // Load GeoJSON from an external file
 var myHeaders = new Headers();
@@ -152,6 +184,9 @@ function getdata(link,arryz,where){
     .then(result => arryz=result)
     .then(data => arryz = data)
     .then(() => updatemap(arryz,where))
+    .then(() => coastalcount+=returncountonlayer(layercoastalforcount,arryz.geometries[0].coordinates[0]))
+    .then(() => rubbercount+=returncountonlayer(layerrubberplantation,arryz.geometries[0].coordinates[0]))
+    .then(() =>  updatecountcosrub(coastalcount,rubbercount,arryz.geometries[0].coordinates[0]))
     .catch(error => console.log('error', error));
 }
 
