@@ -19,7 +19,8 @@ var unconfirm = L.layerGroup();
 // Markers cos50 & cos110
 var cos50 = L.layerGroup(); 
 var cos110= L.layerGroup(); 
-
+var cos30= L.layerGroup(); 
+var cos10= L.layerGroup(); 
 
 // Line
 //var line = L.polyline(coords, {color: "red", weight: 7}).bindPopup("Travel Path");
@@ -44,7 +45,7 @@ legend.onAdd = function(map) {
 };
 legend.addTo(map);
 
-function updatecountcosrub(coastalcount,rubbercount,arraystruct)
+function updatecountcosrub(coastalcount,rubbercount,coastal30count,coastal10count,arraystruct) 
 {
   itertrack+=1;
   totalcount+=arraystruct.length;
@@ -57,7 +58,9 @@ function updatecountcosrub(coastalcount,rubbercount,arraystruct)
         '<h5>Layer Counts</h5>' +
         '<ul>' +
         '<li>Total : '+totalcount +
-        '<li>Coastal : '+coastalcount +
+        '<li>Coastal 60 Km : '+coastalcount +
+        '<li>Coastal 30 Km : '+coastal30count +
+        '<li>Coastal 10 Km : '+coastal10count +
         '<li>Rubber : '+rubbercount +
         '</ul>'
     return div;
@@ -109,13 +112,21 @@ setTimeout(function () {
 
 var rubberplantation = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/rubber/rubber-dissolved.geojson' //rubber dissolved actually
 var buffer60km = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
+var buffer30km = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/30kmbuffer.geojson'  //note 30 km buffer actually
+var buffer10km = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/10kmbuffer.geojson'  //note 10 km buffer actually
+
 //var airquality = 'https://raw.githubusercontent.com/vichuroxx/Qgis-Project/main/shape/coastal/coastal-buffer.geojson'  //note 60 km buffer actually
 
 //for count data
 var layercoastalforcount;
+var layercoastal30forcount;
+var layercoastal10forcount;
 var layerrubberplantation;
 
 var coastalcount=0;
+var coastal30count=0;
+var coastal10count=0;
+
 var rubbercount=0;
 var totalcount=0;
 var itertrack=0;
@@ -126,6 +137,14 @@ $.getJSON(rubberplantation, function(json){
 
 $.getJSON(buffer60km, function(json){
     layercoastalforcount = json;
+});
+
+$.getJSON(buffer30km, function(json){
+    layercoastal30forcount = json;
+});
+
+$.getJSON(buffer10km, function(json){
+    layercoastal10forcount = json;
 });
 
 fetch(
@@ -144,6 +163,24 @@ fetch(
 ).then(
   data => L.geoJSON(data, style = {"color": "#8B008B"}).addTo(cos110)
 )
+
+
+fetch(
+  buffer30km
+).then(
+  res => res.json()
+).then(
+  data => L.geoJSON(data, style = {"color": "#8B008B"}).addTo(cos30)
+)
+
+fetch(
+  buffer10km
+).then(
+  res => res.json()
+).then(
+  data => L.geoJSON(data, style = {"color": "#8B008B"}).addTo(cos10)
+)
+
 
 
 function returncountonlayer(Geojsonvar,arraystruct)
@@ -186,7 +223,9 @@ function getdata(link,arryz,where){
     .then(() => updatemap(arryz,where))
     .then(() => coastalcount+=returncountonlayer(layercoastalforcount,arryz.geometries[0].coordinates[0]))
     .then(() => rubbercount+=returncountonlayer(layerrubberplantation,arryz.geometries[0].coordinates[0]))
-    .then(() =>  updatecountcosrub(coastalcount,rubbercount,arryz.geometries[0].coordinates[0]))
+    .then(() => coastal30count+=returncountonlayer(layercoastal30forcount,arryz.geometries[0].coordinates[0]))
+    .then(() => coastal10count+=returncountonlayer(layercoastal10forcount,arryz.geometries[0].coordinates[0]))
+    .then(() =>  updatecountcosrub(coastalcount,rubbercount,coastal30count,coastal10count,arryz.geometries[0].coordinates[0]))
     .catch(error => console.log('error', error));
 }
 
@@ -323,7 +362,9 @@ var overlayMaps = {
     "Unconfirmed" : unconfirm,
     "Air Quality": airquality,
     "Rubber plantations": cos50,
-    "Coastal : 60 km buffer" : cos110
+    "Coastal : 60 km buffer" : cos110,
+    "Coastal : 30 km buffer" : cos30,
+    "Coastal : 10 km buffer" : cos10
 };
 //L.control.layers(baseMaps, coastalline, {position: "topleft", collapsed: false}).addTo(map);
 L.control.layers(baseMaps,overlayMaps, {position: "topleft", collapsed: false}).addTo(map);
